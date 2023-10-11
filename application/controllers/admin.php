@@ -522,6 +522,8 @@ class Admin extends CI_Controller
 		}else{
 			$data['authorized'] = false;
 		}
+		$data['siswa'] = $this->SiswaModel->get_detail_siswa();
+
 		$data['rekapitulasi'] = $this->RekapitulasiModel->get_rekapitulasi();
 
 

@@ -27,6 +27,14 @@ class SiswaModel extends CI_Model
     $this->db->where('nis', $nis);
     $this->db->update('siswa', $data);
 }
+public function get_detail_siswa()
+  {
+    $query = $this->db->select('s.nis, s.nama_siswa, s.id_kelas, s.tgl_lhr_siswa, s.jk_siswa, s.agama_siswa, s.alamat_siswa,k.nama_kelas')
+    ->from('siswa s')
+    ->join('kelas k','k.id_kelas = s.id_kelas')  
+    ->get();
+    return $query->result_array();
+  }
 
   // Tambahkan metode lainnya sesuai kebutuhan
 }

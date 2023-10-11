@@ -11,11 +11,27 @@
                 <form action="<?php echo site_url('admin/save_rekapitulasi'); ?>" method="post">
                     <div class="form-group">
                         <label for="nis">NIS:</label>
-                        <input type="text" class="form-control" name="nis" id="nis" required>
+                        <select name="nis" id="nis2" class="form-control" onchange="namasiswa()">
+                            <option disabled selected value="" > --Pilih Nama Siswa--</option>
+                            <?php foreach ($siswa as $row) : ?>
+                                <option value="<?= $row['nis']; ?>-<?=$row['nama_kelas']?>"><?= $row['nis']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <!-- <input type="text" class="form-control" name="nis" id="nis" required> -->
                     </div>
                     <div class="form-group">
                         <label for="nis">Nama Siswa:</label>
-                        <input type="text" class="form-control" name="nama_siswa" id="nama_siswa" required>
+                        <select name="nama_siswa" id="nama_siswa2" class="form-control" readonly>
+                            <option disabled selected value="">--Pilih Nama Siswa--</option>
+                            <?php foreach ($siswa as $row) : ?>
+                                <option value="<?= $row['nis']; ?>"><?= $row['nama_siswa']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <!-- <input type="text" class="form-control" name="nama_siswa" id="nama_siswa" required> -->
+                    </div>
+                    <div class="form-group">
+                        <label for="kelas">Kelas :</label>
+                        <input type="text" class="form-control" name="kelas" id="nama_kelas" readonly> 
                     </div>
                     <div class="form-group">
                         <label for="nama">Keterangan:</label>

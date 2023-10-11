@@ -60,15 +60,15 @@
                     <i class="fas fa-chalkboard-teacher"></i>
                     <span>Data Guru</span>
                 </a>
-                <div id="DataGuru" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                 <div id="DataGuru" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Pilihan Menu</h6>
                         <a class="collapse-item" href="<?php echo base_url('admin/data_guru'); ?>"><i class="fas fa-user-check"></i> Nama Guru</a>
 
-                        <a class="collapse-item" href="<?php echo base_url('admin/data_absensi'); ?>"><i class="fas fa-graduation-cap"></i> Absensi Siswa</a>
+                        <!-- <a class="collapse-item" href="<?php echo base_url('admin/data_absensi'); ?>"><i class="fas fa-graduation-cap"></i> Absensi Siswa</a> -->
                         
                     </div>
-                </div>
+                </div> 
             </li>
 
             <!-- Nav Item - Charts -->
@@ -94,11 +94,29 @@
             </li>
                 <?php }?>
             <!-- Nav Item - Tables -->
+            <?php if ($this->session->userdata('role') == 2){?> 
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo base_url('admin/data_absensi'); ?>">
+                    <i class="fas fa-bullhorn"></i>
+                    <span>Data Absen</span></a>
+            </li>   
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo base_url('admin/data_rekapitulasi'); ?>">
                     <i class="fas fa-print"></i>
                     <span>Rekapitulasi</span></a>
             </li>
+
+            <?php } ?>
+            <?php if ($this->session->userdata('role') == 3){?> 
+                <li class="nav-item">
+                <a class="nav-link" href="<?php echo base_url('admin/data_rekapitulasi'); ?>">
+                    <i class="fas fa-print"></i>
+                    <span>Rekapitulasi</span></a>
+            </li>
+            <?php } ?>    
+
+
              <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="<?php echo site_url('logout'); ?>">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

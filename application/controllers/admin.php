@@ -19,14 +19,14 @@ class Admin extends CI_Controller
 			redirect(base_url("login"));
 		}
 
-		if ($this->session->userdata('role') != 1) {
-			if($this->uri->segment(2) != '' && $this->uri->segment(2) != 'data_rekapitulasi')
-			{
-			echo "<script>alert('Your are not authorized');
-			window.location.href='" . base_url() . "admin/';
-			</script>";
-			}
-		}
+		// if ($this->session->userdata('role') != 2) {
+		// 	if($this->uri->segment(2) != '' && $this->uri->segment(2) != 'data_rekapitulasi')
+		// 	{
+		// 	echo "<script>alert('Your are not authorized');
+		// 	window.location.href='" . base_url() . "admin/';
+		// 	</script>";
+		// 	}
+		// }
 	}
 
 	function index()
@@ -569,8 +569,10 @@ class Admin extends CI_Controller
 			echo "<script>window.location.href = '" . site_url('admin/data_rekapitulasi') . "';</script>";
 		} else {
 			// Jika validasi berhasil, simpan data kelas ke database
+			$data_nis = explode('-',$this->input->post('nis'));
+
 			$data = array(
-				'nis' => $this->input->post('nis'),
+				'nis' => $data_nis[0],
 				'nama_siswa' => $this->input->post('nama_siswa'),
 				'tgl_rekap' => $this->input->post('tgl_rekap'),
 				'keterangan' => $this->input->post('keterangan'),

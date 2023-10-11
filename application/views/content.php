@@ -6,7 +6,7 @@
 
 
 <div class="row">
-<?php if ($this->session->userdata('role') ==1){?>
+<?php if ($this->session->userdata('role') ==1 || $this->session->userdata('role') ==2){?>
   <div class="col-xl-3 col-md-6 mb-4">
     <div class="card border-left-primary shadow h-100 py-2">
       <div class="card-body">

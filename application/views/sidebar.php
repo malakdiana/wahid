@@ -29,7 +29,7 @@
             <hr class="sidebar-divider">
 
 
-
+            <?php if ($this->session->userdata('role') == 1){?> 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
@@ -45,15 +45,15 @@
                     </div>
                 </div>
             </li>
-
+           
             <!-- Divider -->
             <hr class="sidebar-divider">
-
+            <?php  } ?>
             <!-- Heading -->
             <div class="sidebar-heading">
                 Sub Menu
             </div>
-
+            <?php if ($this->session->userdata('role') == 1){?>
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#DataGuru" aria-expanded="true" aria-controls="Data Guru">
@@ -92,7 +92,7 @@
                     <i class="fas fa-calendar-check"></i>
                     <span>Jadwal Mata Pelajaran</span></a>
             </li>
-
+                <?php }?>
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo base_url('admin/data_rekapitulasi'); ?>">

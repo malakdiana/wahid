@@ -3,7 +3,9 @@
         <div class="">
             <h2 class=" card-title">Data Rekapitulasi</h2>
         </div>
+        <?php if($authorized){?>
         <button type="button" class="btn btn-primary" id="btntambah" data-toggle="modal" data-target="#modalTambahRekapitulasi"><i class="fas fa-plus"></i> Tambah Rekapitulasi</button>
+        <?php }?>
         <button type="button" class="btn btn-info mb-3" id="btnCetak" onclick="cetakTranskrip()"> <i class="fas fa-print fa-sm"></i> &nbsp; Cetak Rekapitulasi
         </button>
 

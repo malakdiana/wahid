@@ -12,7 +12,7 @@ class RekapitulasiModel extends CI_Model
 
   public function get_rekapitulasi()
   {
-    $query = $this->db->select('nis, nama_siswa, tgl_rekap, keterangan')
+    $query = $this->db->select('nis, nama_siswa, tanggal_rekap, keterangan')
       ->get('rekapitulasi');
     return $query->result_array();
   }

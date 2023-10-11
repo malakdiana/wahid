@@ -18,6 +18,15 @@ class Admin extends CI_Controller
 		if ($this->session->userdata('status') != "login") {
 			redirect(base_url("login"));
 		}
+
+		if ($this->session->userdata('role') != 1) {
+			if($this->uri->segment(2) != '' && $this->uri->segment(2) != 'data_rekapitulasi')
+			{
+			echo "<script>alert('Your are not authorized');
+			window.location.href='" . base_url() . "admin/';
+			</script>";
+			}
+		}
 	}
 
 	function index()
@@ -39,6 +48,7 @@ class Admin extends CI_Controller
 
 	function datasiswa()
 	{
+		
 		$data['siswa'] = $this->SiswaModel->get_siswa();
 		$data['kelas'] = $this->KelasModel->get_kelas();
 
@@ -506,6 +516,12 @@ class Admin extends CI_Controller
 
 	function data_rekapitulasi()
 	{
+		if($this->session->userdata('role') == 1)
+		{
+			$data['authorized'] = true;
+		}else{
+			$data['authorized'] = false;
+		}
 		$data['rekapitulasi'] = $this->RekapitulasiModel->get_rekapitulasi();
 
 

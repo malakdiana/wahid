@@ -15,11 +15,19 @@
                     </div>
                     <div class="form-group">
                         <label for="kelas">NIS:</label>
-                        <input type="text" class="form-control" name="nis" id="nis" required>
+                        <div class="form-group">
+                            <select name="nis" id="nis_add" class="form-control" onchange="namasiswa()">
+                                <option disabled selected value="" > --Pilih NIS--</option>
+                                <?php foreach ($siswa as $row) : ?>
+                                    <option value="<?= $row['nis']; ?>"><?= $row['nis']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <!-- <input type="text" class="form-control" name="nis" id="nis" required> -->
                     </div>
                     <div class="form-group">
                         <label for="jadwal">Nama Siswa:</label>
-                        <select name="nis" class="form-control">
+                        <select name="nama_siswa" id="nama_siswa_add" class="form-control" onchange="nis_change()">
                             <option disabled selected value="">--Pilih Nama Siswa--</option>
                             <?php foreach ($siswa as $row) : ?>
                                 <option value="<?= $row['nis']; ?>"><?= $row['nama_siswa']; ?></option>
@@ -31,7 +39,7 @@
                         <select name="id_jadwal" class="form-control">
                             <option disabled selected value="">--Pilih Jadwal--</option>
                             <?php foreach ($jadwal as $row) : ?>
-                                <option value="<?= $row['id_jadwal']; ?>"><?= $row['hari']; ?></option>
+                                <option value="<?= $row['id_jadwal']; ?>"><?= $row['hari']; ?> -<?= $row['nama_matapelajaran']; ?> </option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -57,11 +65,17 @@
                     </div>
                     <div class="form-group">
                         <label for="tanggal">Tanggal:</label>
-                        <input type="date" class="form-control" name="tanggal" id="tanggal" required>
+                        <input type="date" class="form-control" name="tanggal" id="tanggal" required value="<?php echo date("Y-m-d")?>">
                     </div>
                     <div class="form-group">
                         <label for="nama">Nip:</label>
-                        <input type="text" class="form-control" name="nip" id="nip" required>
+                        <select name="nip" class="form-control">
+                            <option disabled selected value="">--Pilih NIP Guru--</option>
+                            <?php foreach ($guru as $row) : ?>
+                                <option value="<?= $row['nip']; ?>"><?= $row['nip']; ?> - <?= $row['nama_guru']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <!-- <input type="text" class="form-control" name="nip" id="nip" required> -->
                     </div>
 
                     <button type="submit" class="btn btn-primary">Simpan</button>

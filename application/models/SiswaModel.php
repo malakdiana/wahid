@@ -16,6 +16,18 @@ class SiswaModel extends CI_Model
       ->get('siswa');
     return $query->result_array();
   }
+
+  public function get_total_siswa()
+  {
+    $query = $this->db->select('kelas.id_kelas, nama_kelas, count(siswa.id_kelas) as jumlah')
+      ->from('kelas')
+      ->join('siswa','siswa.id_kelas = kelas.id_kelas','left')
+      ->group_by('nama_kelas ,kelas.id_kelas')
+      ->get();
+    return $query->result_array();
+  }
+
+
   public function hapus_siswa($nis)
   {
     // Hapus data siswa dari tabel siswa berdasarkan nis

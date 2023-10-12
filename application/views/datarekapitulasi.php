@@ -3,9 +3,9 @@
         <div class="">
             <h2 class=" card-title">Data Rekapitulasi</h2>
         </div>
-        <button type="button" class="btn btn-primary" id="btntambah" data-toggle="modal" data-target="#modalTambahRekapitulasi"><i class="fas fa-plus"></i> Tambah Rekapitulasi</button>
-        <button type="button" class="btn btn-info mb-3" id="btnCetak" onclick="cetakTranskrip()"> <i class="fas fa-print fa-sm"></i> &nbsp; Cetak Rekapitulasi
-        </button>
+        <!-- <button type="button" class="btn btn-primary" id="btntambah" data-toggle="modal" data-target="#modalTambahRekapitulasi"><i class="fas fa-plus"></i> Tambah Rekapitulasi</button> -->
+        <a href="<?php echo site_url('admin/cetak'); ?>"><button type="button" class="btn btn-info mb-3" id="btnCetak" > <i class="fas fa-print fa-sm"></i> &nbsp; Cetak Rekapitulasi
+        </button></a>
 
         <style>
             .larger-text {
@@ -45,8 +45,10 @@
                         <th>No.</th>
                         <th>Nis</th>
                         <th>Nama Siswa</th>
-                        <th>Tanggal Rekap</th>
-                        <th>Keterangan</th>
+                        <th>Hari</th>
+                        <th>Mata Pelajaran</th>
+                        <th>Kelas</th>
+                        <th>Absensi</th>
                         <th width="90px" class="text-center" id="aksi">Aksi</th>
                     </tr>
                 </thead>
@@ -58,22 +60,19 @@
                                 <td><?php echo $no++; ?></td>
                                 <td><?php echo $row['nis']; ?></td>
                                 <td><?php echo $row['nama_siswa']; ?></td>
-                                <td><?php echo $row['tgl_rekap']; ?></td>
+                                <td><?php echo $row['hari']; ?></td>
+                                <td><?php echo $row['nama_matapelajaran']; ?></td>
+                                <td><?php echo $row['nama_kelas']; ?></td>
                                 <td><?php echo $row['keterangan']; ?></td>
                                 <td id="btnaksi">
                                     <!-- Kolom untuk aksi, misalnya tombol edit atau hapus -->
                                     <!-- Isi dengan aksi yang diinginkan -->
                                     <div class=" btn-group">
                                         <!-- Tombol Edit -->
-                                        <button type="button" class="btn btn-sm btn-warning mr-1" data-toggle="modal" data-target="#editModal<?php echo $row['nis']; ?>"><i class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-sm btn-primary mr-1" data-toggle="modal" data-target="#editModal<?php echo $row['nis']; ?>"><i class="fas fa-info-circle"></i> Detail</button>
                                         <!-- Tombol Hapus -->
-                                        <a href="<?php echo base_url('admin/hapus_rekapitulasi/' . $row['nis']); ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus data Rekapitulasi Ini?');">
-                                            <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-
-                                           
-
-
-
+                                        <!-- <a href="<?php echo base_url('admin/hapus_rekapitulasi/' . $row['nis']); ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus data Rekapitulasi Ini?');">
+                                            <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button> -->
                                         </a>
                                     </div>
 
@@ -89,7 +88,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="editModalLabel">Edit Data Absensi</h5>
+                                    <h5 class="modal-title" id="editModalLabel">Detail Data Rekapitulasi</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -103,26 +102,33 @@
 
                                         <div class="form-group">
                                             <label for="kelas">Nama Siswa:</label>
-                                            <input type="text" class="form-control" name="nama_siswa" id="nama_siswa" value="<?php echo $row['nama_siswa']; ?>" required>
+                                            <input type="text" class="form-control" name="nama_siswa" id="nama_siswa" readonly value="<?php echo $row['nama_siswa']; ?>" required>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="tanggal">Tanggal Absensi:</label>
-                                            <input type="date" class="form-control" name="tgl_rekap" id="tgl_rekap" value="<?php echo $row['tgl_rekap']; ?>" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="nama">Keterangan:</label>
-                                            <select class="form-control" name="keterangan" id="keterangan">
-                                                <option disabled selected value="">--Pilih Keterangan--</option>
-                                                <option value="Masuk" <?php echo ($row == 'Masuk') ? 'selected' : ''; ?>>Masuk</option>
-                                                <option value="Sakit" <?php echo ($row == 'Sakit') ? 'selected' : ''; ?>>Sakit</option>
-                                                <option value="Ijin" <?php echo ($row == 'Ijin') ? 'selected' : ''; ?>>Ijin</option>
-                                                <option value="Alpa" <?php echo ($row == 'Alpa') ? 'selected' : ''; ?>>Alpa</option>
-                                                <option value="Mati" <?php echo ($row == 'Mati') ? 'selected' : ''; ?>>Mati</option>
-                                            </select>
+                                            <input type="date" class="form-control" name="tgl_rekap" id="tgl_rekap" readonly value="<?php echo $row['tanggal']; ?>" required>
                                         </div>
 
-                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                        <div class="form-group">
+                                            <label for="tanggal">Hari:</label>
+                                            <input type="text" class="form-control" value="<?php echo $row['hari']; ?>" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tanggal">Mata Pelajaran:</label>
+                                            <input type="text" class="form-control" value="<?php echo $row['nama_matapelajaran']; ?>" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tanggal">Kelas:</label>
+                                            <input type="text" class="form-control" value="<?php echo $row['nama_kelas']; ?>" readonly>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="tanggal">Keterangan:</label>
+                                            <input type="text" class="form-control" value="<?php echo $row['keterangan']; ?>" readonly>
+                                        </div>
+
+                                        <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
                                     </form>
                                 </div>
                             </div>
@@ -231,6 +237,7 @@
 <script>
     // Fungsi tombol cetak
     function cetakTranskrip() {
+        console.log('tes');
         window.print();
 
     }

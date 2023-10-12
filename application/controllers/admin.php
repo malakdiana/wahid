@@ -29,15 +29,29 @@ class Admin extends CI_Controller
 		// }
 	}
 
+	function cetak(){
+		$data['rekapitulasi'] = $this->AbsensiModel->get_absensi();
+		$this->load->library('mypdf');
+		$this->mypdf->generate('dompdf', $data);
+	}
+
+	function cetak2(){
+		$data['rekapitulasi'] = $this->AbsensiModel->get_absensi();
+		echo var_dump($data);
+		//$this->load->view('dompdf',$data);
+	}
+
 	function index()
 	{
 		$data['siswa'] = $this->SiswaModel->get_siswa();
 		$data['kelas'] = $this->KelasModel->get_kelas();
-
+		$data['totalsiswa'] = $this->SiswaModel->get_total_siswa();
 		$data['siswa'] = $this->M_login->siswa();
 		$data['guru'] = $this->M_login->guru();
 		$data['absensi'] = $this->M_login->absensi();
 		$data['rekapitulasi'] = $this->M_login->rekapitulasi();
+
+
 
 		$this->load->view("head");
 		$this->load->view("sidebar");
@@ -416,6 +430,7 @@ class Admin extends CI_Controller
 		$data['kelas'] = $this->KelasModel->get_kelas();
 		$data['jadwal'] = $this->JadwalModel->get_jadwal();
 		$data['siswa'] = $this->SiswaModel->get_siswa();
+		$data['guru'] = $this->GuruModel->get_guru();
 
 		$this->load->view("head");
 		$this->load->view("sidebar");
@@ -524,7 +539,7 @@ class Admin extends CI_Controller
 		}
 		$data['siswa'] = $this->SiswaModel->get_detail_siswa();
 
-		$data['rekapitulasi'] = $this->RekapitulasiModel->get_rekapitulasi();
+		$data['rekapitulasi'] = $this->AbsensiModel->get_absensi();
 
 
 		$this->load->view("head");

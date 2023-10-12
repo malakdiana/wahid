@@ -7,7 +7,7 @@
 
 <div class="row">
 <?php if ($this->session->userdata('role') ==1 || $this->session->userdata('role') ==2){?>
-  <div class="col-xl-3 col-md-6 mb-4">
+  <div class="col-xl-3 col-md-6 mb-4 ml-4">
     <div class="card border-left-primary shadow h-100 py-2">
       <div class="card-body">
         <div class="row no-gutters align-items-center">
@@ -23,9 +23,11 @@
       </div>
     </div>
   </div>
+<?php }
+ if ($this->session->userdata('role') ==1 ){?>
 
   <!-- Earnings (Monthly) Card Example -->
-  <div class="col-xl-3 col-md-6 mb-4">
+  <div class="col-xl-3 col-md-6 mb-4 ml-4">
     <div class="card border-left-success shadow h-100 py-2">
       <div class="card-body">
         <div class="row no-gutters align-items-center">
@@ -43,7 +45,7 @@
   </div>
 
   <!-- Earnings (Monthly) Card Example -->
-  <div class="col-xl-3 col-md-6 mb-4">
+  <div class="col-xl-3 col-md-6 mb-4 ml-4">
     <div class="card border-left-info shadow h-100 py-2">
       <div class="card-body">
         <div class="row no-gutters align-items-center">
@@ -70,7 +72,7 @@
   </div>
 <?php } ?>
   <!-- Pending Requests Card Example -->
-  <div class="col-xl-3 col-md-6 mb-4">
+  <div class="col-xl-3 col-md-6 mb-4 ml-4">
 
     <div class="card border-left-warning shadow h-100 py-2">
       <div class="card-body">
@@ -87,6 +89,30 @@
       </div>
     </div>
   </div>
+ </div>
+ <div class="row">
+  <?php if($this->session->userdata('role') ==2){?>
+    <?php foreach ($totalsiswa as $row) : ?>
+    <div class="col-xl-3 col-md-6 mb-4 ml-4">
+   
+    <div class="card border-left-primary shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                      <?=$row['nama_kelas']?></div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $row['jumlah'] ?></div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-user-graduate fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+
+    <?php endforeach; } ?>
+
 </div>
 
 

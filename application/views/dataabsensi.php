@@ -131,3 +131,16 @@
     </div>
 <?php endif; ?>
 </div>
+<script>
+    function namasiswa(){
+      
+        var id = $("#nis_add").val();
+        $('#nama_siswa_add').val(id);
+    }
+
+    function nis_change(){
+        var id = $("#nama_siswa_add").val();
+        $('#nis_add').val(id)
+    }
+
+</script>

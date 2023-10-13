@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 05, 2023 at 04:22 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 7.3.33
+-- Waktu pembuatan: 13 Okt 2023 pada 03.40
+-- Versi server: 10.4.11-MariaDB
+-- Versi PHP: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -24,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `absensi`
+-- Struktur dari tabel `absensi`
 --
 
 CREATE TABLE `absensi` (
@@ -38,16 +39,17 @@ CREATE TABLE `absensi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `absensi`
+-- Dumping data untuk tabel `absensi`
 --
 
 INSERT INTO `absensi` (`id_absensi`, `nis`, `id_jadwal`, `id_kelas`, `keterangan`, `tanggal`, `nip`) VALUES
+('A1', '901111016', 'JUM106', 'KH12C', 'Masuk', '2023-10-12', '202203009'),
 ('ID114', '901111030', 'KAM105', 'KH12A', 'Sakit', '2023-08-19', '202203001');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `guru`
+-- Struktur dari tabel `guru`
 --
 
 CREATE TABLE `guru` (
@@ -61,7 +63,7 @@ CREATE TABLE `guru` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `guru`
+-- Dumping data untuk tabel `guru`
 --
 
 INSERT INTO `guru` (`nip`, `nama_guru`, `id_kelas`, `tgl_lhr_guru`, `jk_guru`, `agama_guru`, `alamat_guru`) VALUES
@@ -78,7 +80,7 @@ INSERT INTO `guru` (`nip`, `nama_guru`, `id_kelas`, `tgl_lhr_guru`, `jk_guru`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jadwal`
+-- Struktur dari tabel `jadwal`
 --
 
 CREATE TABLE `jadwal` (
@@ -89,7 +91,7 @@ CREATE TABLE `jadwal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `jadwal`
+-- Dumping data untuk tabel `jadwal`
 --
 
 INSERT INTO `jadwal` (`id_jadwal`, `hari`, `id_matapelajaran`, `open`) VALUES
@@ -103,7 +105,7 @@ INSERT INTO `jadwal` (`id_jadwal`, `hari`, `id_matapelajaran`, `open`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kelas`
+-- Struktur dari tabel `kelas`
 --
 
 CREATE TABLE `kelas` (
@@ -112,7 +114,7 @@ CREATE TABLE `kelas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `kelas`
+-- Dumping data untuk tabel `kelas`
 --
 
 INSERT INTO `kelas` (`id_kelas`, `nama_kelas`) VALUES
@@ -139,7 +141,7 @@ INSERT INTO `kelas` (`id_kelas`, `nama_kelas`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mata_pelajaran`
+-- Struktur dari tabel `mata_pelajaran`
 --
 
 CREATE TABLE `mata_pelajaran` (
@@ -148,7 +150,7 @@ CREATE TABLE `mata_pelajaran` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `mata_pelajaran`
+-- Dumping data untuk tabel `mata_pelajaran`
 --
 
 INSERT INTO `mata_pelajaran` (`id_matapelajaran`, `nama_matapelajaran`) VALUES
@@ -171,7 +173,7 @@ INSERT INTO `mata_pelajaran` (`id_matapelajaran`, `nama_matapelajaran`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rekapitulasi`
+-- Struktur dari tabel `rekapitulasi`
 --
 
 CREATE TABLE `rekapitulasi` (
@@ -179,7 +181,7 @@ CREATE TABLE `rekapitulasi` (
   `nama_siswa` varchar(30) NOT NULL,
   `id_kelas` varchar(10) NOT NULL,
   `nama_kelas` varchar(30) NOT NULL,
-  `tanggal_rekap` date NOT NULL,
+  `tgl_rekap` date NOT NULL,
   `keterangan` varchar(30) NOT NULL,
   `id_jadwal` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -187,7 +189,7 @@ CREATE TABLE `rekapitulasi` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `siswa`
+-- Struktur dari tabel `siswa`
 --
 
 CREATE TABLE `siswa` (
@@ -201,7 +203,7 @@ CREATE TABLE `siswa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `siswa`
+-- Dumping data untuk tabel `siswa`
 --
 
 INSERT INTO `siswa` (`nis`, `nama_siswa`, `id_kelas`, `tgl_lhr_siswa`, `jk_siswa`, `agama_siswa`, `alamat_siswa`) VALUES
@@ -215,29 +217,32 @@ INSERT INTO `siswa` (`nis`, `nama_siswa`, `id_kelas`, `tgl_lhr_siswa`, `jk_siswa
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
 CREATE TABLE `user` (
   `user_name` varchar(10) NOT NULL,
   `password` varchar(50) NOT NULL,
   `email_user` varchar(50) NOT NULL,
-  `level` enum('1','2','3','') NOT NULL
+  `level` enum('1','2','3','') NOT NULL,
+  `role` enum('1','2','3') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`user_name`, `password`, `email_user`, `level`) VALUES
-('wahid', 'wahid123', 'wahidkhoirul576@gmail.com', '1');
+INSERT INTO `user` (`user_name`, `password`, `email_user`, `level`, `role`) VALUES
+('guru', 'guru', 'siswa@gmail.com', '1', '2'),
+('siswa', 'siswa123', 'siswa@gmail.com', '1', '3'),
+('wahid', 'wahid123', 'wahidkhoirul576@gmail.com', '1', '1');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `absensi`
+-- Indeks untuk tabel `absensi`
 --
 ALTER TABLE `absensi`
   ADD PRIMARY KEY (`id_absensi`),
@@ -247,33 +252,33 @@ ALTER TABLE `absensi`
   ADD KEY `id_user` (`nip`);
 
 --
--- Indexes for table `guru`
+-- Indeks untuk tabel `guru`
 --
 ALTER TABLE `guru`
   ADD PRIMARY KEY (`nip`),
   ADD KEY `id_kelas` (`id_kelas`);
 
 --
--- Indexes for table `jadwal`
+-- Indeks untuk tabel `jadwal`
 --
 ALTER TABLE `jadwal`
   ADD PRIMARY KEY (`id_jadwal`),
   ADD KEY `id_matapelajaran` (`id_matapelajaran`);
 
 --
--- Indexes for table `kelas`
+-- Indeks untuk tabel `kelas`
 --
 ALTER TABLE `kelas`
   ADD PRIMARY KEY (`id_kelas`);
 
 --
--- Indexes for table `mata_pelajaran`
+-- Indeks untuk tabel `mata_pelajaran`
 --
 ALTER TABLE `mata_pelajaran`
   ADD PRIMARY KEY (`id_matapelajaran`);
 
 --
--- Indexes for table `rekapitulasi`
+-- Indeks untuk tabel `rekapitulasi`
 --
 ALTER TABLE `rekapitulasi`
   ADD PRIMARY KEY (`nis`),
@@ -281,24 +286,24 @@ ALTER TABLE `rekapitulasi`
   ADD UNIQUE KEY `id_jadwal` (`id_jadwal`);
 
 --
--- Indexes for table `siswa`
+-- Indeks untuk tabel `siswa`
 --
 ALTER TABLE `siswa`
   ADD PRIMARY KEY (`nis`),
   ADD KEY `id_kelas` (`id_kelas`);
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_name`);
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `absensi`
+-- Ketidakleluasaan untuk tabel `absensi`
 --
 ALTER TABLE `absensi`
   ADD CONSTRAINT `absensi_ibfk_1` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id_kelas`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -307,26 +312,26 @@ ALTER TABLE `absensi`
   ADD CONSTRAINT `absensi_ibfk_4` FOREIGN KEY (`nip`) REFERENCES `guru` (`nip`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `guru`
+-- Ketidakleluasaan untuk tabel `guru`
 --
 ALTER TABLE `guru`
   ADD CONSTRAINT `guru_ibfk_1` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id_kelas`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `jadwal`
+-- Ketidakleluasaan untuk tabel `jadwal`
 --
 ALTER TABLE `jadwal`
   ADD CONSTRAINT `jadwal_ibfk_1` FOREIGN KEY (`id_matapelajaran`) REFERENCES `mata_pelajaran` (`id_matapelajaran`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `rekapitulasi`
+-- Ketidakleluasaan untuk tabel `rekapitulasi`
 --
 ALTER TABLE `rekapitulasi`
   ADD CONSTRAINT `rekapitulasi_ibfk_3` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id_kelas`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `rekapitulasi_ibfk_4` FOREIGN KEY (`id_jadwal`) REFERENCES `jadwal` (`id_jadwal`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `siswa`
+-- Ketidakleluasaan untuk tabel `siswa`
 --
 ALTER TABLE `siswa`
   ADD CONSTRAINT `siswa_ibfk_1` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id_kelas`) ON DELETE CASCADE ON UPDATE CASCADE;
